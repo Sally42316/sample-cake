@@ -1,0 +1,47 @@
+<div class="container">
+   <h4 class="my-5"><span style="background-color:#eeeeee">会員情報編集</span></h4>
+</div>
+<div class="container">
+ <div class="row">
+  <div class="col-8">
+
+      <%= form_with model: @customer, url: customers_information_path, method: :patch do |f| %>
+      <table class="table table-borderless">
+        <tr>
+          <td>氏名</td>
+          <td><%= f.text_field :family_name %></td>
+          <td><%= f.text_field :first_name %></td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td><%= f.text_field :family_name_kana %></td>
+          <td><%= f.text_field :first_name_kana %></td>
+        </tr>
+        <tr>
+          <td>郵便番号</td>
+          <td><%= f.text_field :post_code %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td colspan="2">
+            <%= f.text_field :address, style: "width: 88%;" %>
+          </td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%= f.text_field :tell_number%></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= f.text_field :email %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit "編集内容を保存", class:"btn btn-success" %></td>
+          <td><%=link_to "退会する", customers_check_path, class:"btn btn-danger" %></td>
+        </tr>
+      </table>
+      <% end %>
+   </div>
+  </div>
+</div>

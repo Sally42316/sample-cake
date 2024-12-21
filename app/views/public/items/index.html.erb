@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <%= render 'public/items/sidebar', genres: @genres %>
+    <div class="col-md-10">
+      <% if @genre %>
+      <!--ジャンルが選択された場合-->
+      <h2><%= @genre.name %>一覧<span style="font-size:20px;">(全<%= @total_items %>件)</span></h2>
+      <% else %>
+      <!--ジャンルが選択されていない場合-->
+      <h2>商品一覧<span style="font-size:20px;">(全<%= @total_items %>件)</span></h2>
+      <% end %>
+
+
+        <div class="d-flex flex-wrap">
+          <% @items.each do |item| %>
+            <div class="col-md-3 mb-4"> <!-- 4つの列 -->
+              <div class="box text-center">
+                <%= link_to item_path(item.id) do %>
+                  <%= image_tag url_for(item.image.variant(resize_to_limit: [150, 150])) %><br>
+                <% end %>
+                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  <%= link_to item.name, item_path(item.id) %>
+                </p>
+                <p>¥<%= number_to_currency(item.price, delimiter: ',', unit: '', precision: 0) %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= paginate @items %>
+  </div>
+</div>

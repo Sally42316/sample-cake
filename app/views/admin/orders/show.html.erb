@@ -1,0 +1,96 @@
+<div class="container">
+  <h4 class="m-4"><span style="background-color:#eeeeee">注文履歴詳細</span></h4>
+</div>
+
+<!--注文履歴 -->
+<div class="container">
+    <div class="row">
+      <div class="col-sm-7">
+        <table class="table table-borderless">
+          <tr>
+            <td><strong>購入者</strong></td>
+            <td><%= @order.customer.full_name %></td>
+          </tr>
+          <tr>
+            <td><strong>注文日</strong></td>
+            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+          <td><strong>配送先</strong></td>
+            <td>〒<%= @order.post_code %> <%= @order.address %><br>
+          </tr>
+          <tr>
+            <td><strong>支払方法</strong></td>
+            <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
+          </tr>
+          <tr>
+            <td><strong>注文ステータス</strong></td>
+             <td><%= form_with model: @order, url: admin_order_path(@order), class: "form-row" do |f| %>
+              <%= f.select :status, Order.statuses_i18n.invert, class: "mr-4" %>
+              <span style="margin: 0 10px;"></span>
+              <%= f.submit "更新", class:"btn btn-sm btn-success " %>
+             <% end %></td>
+           </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!--注文した商品 -->
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <table class="table">
+          <thead class= "thead-light" >
+            <tr>
+              <th>商品名</th>
+              <th>単価（税込）</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th>製作ステータス</th>
+              <th colspan="5"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <% @order.order_details.each do |order_detail| %>
+              <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= (order_detail.price).floor.to_s(:delimited, delimiter: ',') %></td>
+                <td><%= order_detail.amount %></td>
+                <td><%= (order_detail.price * order_detail.amount).floor.to_s(:delimited, delimiter: ',') %></td>
+                <td>
+                  <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), local: true, class: "form-row" do |f| %>
+                  <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert, class: "mr-4" %>
+                  <span style="margin: 0 10px;"></span>
+                  <%= f.submit "更新", class:"btn btn-sm btn-success" %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-1">
+      </div>
+    <!--金額 -->
+      <div class="col-4">
+        <table class="table table-borderless" >
+          <tbody>
+          <tr>
+            <td><strong>商品合計</strong></td>
+            <td><%= (@order.total_price - @order.shipping_fee).to_s(:delimited, delimiter: ',') %> 円</td>
+          </tr>
+          <tr>
+            <td><strong>送料</strong></td>
+            <td><%= @order.shipping_fee.to_s(:delimited) %> 円</td>
+          </tr>
+          <tr>
+            <td><strong>請求金額合計</strong></td>
+            <td><%= @order.total_price.to_s(:delimited) %> 円</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

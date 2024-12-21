@@ -1,0 +1,65 @@
+<div class="mt-4">
+  <div class="container">
+    <h4 class="mb-3"><span style="background-color:#eeeeee">注文情報入力</span></h4>
+  </div>
+  <div class="container">
+    <%= form_with model: @order, url: orders_confirm_path, method: :get do |f| %>
+      <div>
+        <div><b>支払方法</b></div>
+        <div style="padding-left: 50px;">
+          <div>
+            <%= f.radio_button :payment_method, 0, checked: true %>
+            <%= f.label :payment_method, "クレジットカード", class: 'mb-0' %>
+          </div>
+          <div>
+            <%= f.radio_button :payment_method, 1 %>
+            <%= f.label :payment_method, "銀行振込" %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div><b>お届け先</b></div>
+        <div style="padding-left: 50px;">
+          <div>
+            <%= f.radio_button :address, :address, checked: true, class: 'mb-0' %>
+            <%= f.label :address, "ご自身の住所", class: 'mb-0' %>
+            <div style="padding-left: 30px;">
+              <p class="mb-0">〒<%= current_customer.postcode %> <%= current_customer.address %></p>
+              <p class="mb-0" style="padding-bottom: 10px;"><%= current_customer.family_name + current_customer.first_name %> 様</p>
+            </div>
+          </div>
+          <div>
+            <%= f.radio_button :address, :select_address %>
+            <%= f.label :address, "登録済住所から選択", class: 'mb-0' %>
+            <div style="padding: 5px 0 10px 30px;">
+              <%= f.select :selected_address, @addresses.map { |a| ["〒" + a.postcode + " " + a.address + " " + a.name + " " + "様", a.id] }, include_blank: "配送先を選択してください" %>
+            </div>
+          </div>
+            <%= f.radio_button :address, :new_address %>
+            <%= f.label :address, "新しいお届け先", class: 'mb-0' %>
+            <%= fields_for "new_address[]", Address.new do |address_f| %>
+              <div style="padding-left: 30px;">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td style="padding-right: 15px;">郵便番号(ハイフンなし)</td>
+                      <td style="padding-bottom: 5px;"><%= address_f.text_field :postcode, placeholder: "0000000", style: "width: 350px;" %></td>
+                    </tr>
+                    <tr>
+                      <td>住所</td>
+                      <td style="padding-bottom: 5px;"><%= address_f.text_field :address, placeholder: "東京都西新宿1-1-0", style: "width: 600px;"%></td>
+                    </tr>
+                    <tr>
+                      <td>宛名</td>
+                      <td style="padding-bottom: 5px;"><%= address_f.text_field :name, placeholder: "大谷翔兵", style: "width: 350px;" %></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            <div class="text-center" style="padding: 10px 0;"><%= f.submit "確認画面へ進む", class: "btn btn-primary" %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

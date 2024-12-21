@@ -1,0 +1,58 @@
+<% if @cart_items.empty? %>
+<div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+  <p style="text-align: center;">カートにはアイテムがありません。</p>
+</div>
+<% else %>
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="mb-0"><span style="background-color:#eeeeee">ショッピングカート</span></h5>
+      <%= button_to 'カートを空にする', all_destroy_cart_items_path, method: :delete, data: { confirm: '本当にカートを空にしますか？' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+  <div class="container mt-2">
+    <table class="table table-bordered">
+      <thead style="background-color: #f2f2f2;">
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td class="align-middle"><%= image_tag url_for(cart_item.item.image.variant(resize_to_limit: [50, 50])) %><span style="margin-left: 15px;"><%= cart_item.item.name %></td>
+            <td class="align-middle"><%= number_to_currency(cart_item.item.price,delimiter: ',', unit: '', precision: 0) %></td>
+            <td class="align-middle">
+              <%= form_with url: cart_item_path(cart_item), method: :patch do |f| %>
+                  <%= f.select :amount, options_for_select((1..10).map { |n| [n, n] }, cart_item.amount), class: "form-control me-2", id: "cart_item_amount_#{cart_item.id}" %>
+                  <%= f.submit "変更", class: "btn btn-success" %>
+              <% end %>
+            </td>
+            <td class="align-middle"><%= number_to_currency(cart_item.item.price * cart_item.amount,delimiter: ',', unit: '', precision: 0) %></td>
+            <td class="align-middle"><%= link_to '削除する', cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% total_amount = @cart_items.sum { |item| item.price * item.amount } %>
+    <div class="container mt-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <%= link_to '買い物を続ける', root_path, class: 'btn btn-primary' %>
+        <div>
+          <table class="table table-bordered">
+            <tr>
+              <td><strong>合計金額</strong></td>
+              <td><%= number_to_currency(total_amount,delimiter: ',', unit: '', precision: 0) %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-4">
+    <%= link_to '情報入力に進む', new_order_path, class: 'btn btn-success btn-lg' %>
+  </div>
+<% end %>

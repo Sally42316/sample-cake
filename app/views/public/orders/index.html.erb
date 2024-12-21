@@ -1,0 +1,44 @@
+<div class="container">
+  <h4 class="m-4"><span style="background-color:#eeeeee">注文履歴一覧</span></h4> 
+  <table class="table table-bordered">
+    <thead style="background-color: #f5f5f5;">
+      <tr>
+        <th>注文日</th>
+        <th>配送先</th>
+        <th>注文商品</th>
+        <th>支払金額</th>
+        <th>ステータス</th>
+        <th>注文詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <!--注文日-->
+          <td class="align-middle"><%= order.created_at.strftime('%Y/%m/%d') %></td>
+          <!--配送先-->
+          <td class="align-middle">
+            <%= "〒"+order.post_code %><br>
+            <!--郵便番号が数値として保存されている場合は、文字列として変換する必要あり-->
+            <%= order.address %><br>
+            <%= order.name %>
+          </td>
+          <!--注文商品-->
+          <td class="align-middle">
+            <ul>
+              <% order.order_details.each do |order_detail| %>
+                <li><%= order_detail.item.name %></li>
+              <% end %>
+            </ul>
+          </td>
+          <!--支払金額-->
+          <td class="align-middle"><%= number_to_currency(order.total_price, delimiter: ',', unit:'', precision: 0)+"円" %></td>
+          <!--ステータス-->
+          <td class="align-middle"><%= order.status %></td>
+          <!--詳細リンク-->
+          <td class="align-middle"><%= link_to '表示する', order_path(order), class: 'btn btn-primary' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

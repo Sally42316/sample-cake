@@ -1,0 +1,44 @@
+<div class='container'>
+  <div class='row'>
+    <%= render 'public/items/sidebar', genres: @genres %>
+    <div class='col-xl-4 col-md-4 text-center'>
+      <%= image_tag url_for(@item.image.variant(resize_to_limit: [200, 200])) %>
+    </div>
+    <div class='col-xl-6 col-md-6'>
+      <p><strong><%= @item.name %></strong></p>
+      <p><%= @item.introduction %></p>
+      <p>￥<%= @item.price.to_s(:delimited) %>(税込)</p>
+      <%= form_with url: cart_items_path, method: :post do |f| %>
+        <div class="form-group d-flex">
+          <div class="mx-2">
+          <%= f.select :amount, options_for_select([['個数選択', '']] + (1..10).map { |n| [n, n] }), {}, class: "form-control" %>
+          
+        
+          <!--
+          [['個数選択', '']]...最初の選択肢。ユーザーが何も選択しない場合のプレースホルダーとして機能します。'個数選択'は選択肢のラベルで、''（空の文字列）は、送信される値です。この選択肢が選ばれた場合、amountには空の値が設定されます。
+          (1..10)...1から10までの範囲を表すオブジェクト
+          .map { |n| [n, n] }...この範囲内の各数値nに対して、[n, n]という配列を生成します。ここで、最初のnが選択肢として表示され、2番目のnが送信される値となります。
+          →例えば、1の場合は[1, 1]、2の場合は[2, 2]というペアが生成されます。この操作により、選択肢の配列は[[1, 1], [2, 2], ..., [10, 10]]になります。
+          {},...オプションを指定するためのもの。空欄の場合はデフォルトを設定します。
+          -->
+          
+
+          </div>
+
+        <%= hidden_field_tag :item_id, @item.id %>
+
+        
+        <!--hidden_field_tag...非表示のフィールドを作成
+          :item_id...このフィールドがこの名前で送信される
+          @item.id...今回はカートに入れたいアイテムのIDを送るため、この記述-->
+        
+
+        
+
+        <%= f.submit "カートに入れる", class: "btn btn-success" %>
+      <% end %>
+
+        </div>
+    </div>
+  </div>
+</div>

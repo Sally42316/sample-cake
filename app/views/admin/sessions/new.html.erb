@@ -1,0 +1,26 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col">
+      <div class="col-6 offset-3">
+
+   <h4><span style="background-color:#eeeeee">管理者ログイン</span></h4>
+   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+   <%= render "public/shared/error_messages", resource: resource %>
+
+        <div class="field my-2">
+          <%= f.label :"メールアドレス",class:"form-label mt-3"%><br />
+          <%= f.email_field :email, placeholder: "sample@example.com", autofocus: true, autocomplete: "email" ,class:"form-control" %>
+        <div class="field my-2">
+          <%= f.label :"パスワード",class:"form-label mt-3" %><br />
+          <%= f.password_field :password, autocomplete: "current_password",class:"form-control" %>
+        </div>
+
+        <div class="action">
+            <td><%= f.submit "ログイン", class: "btn btn-primary" %></td>
+        </div>
+
+    <% end %>
+      </div>
+    </div>
+  </div>
+</div>

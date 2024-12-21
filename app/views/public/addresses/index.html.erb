@@ -1,0 +1,82 @@
+<div class="container">
+<h4 class="m-4"><span style="background-color:#eeeeee">配送先登録・一覧</span></h4>
+</div>
+<%= form_with model: @address, url: addresses_path do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-11">
+      <table class=" table table-borderless">
+       <tbody>
+      <tr>
+        <td class="col-3">
+          <%= f.label :post_code, "郵便番号(ハイフンなし)" %>
+        </td>
+        <td>
+        </td>
+        <td><%= f.text_field :post_code, placeholder: "0000000" %>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :address, "住所" %>
+        </td>
+        <td></td>
+        <td>
+          <%= f.text_field :address, :size=>"60", placeholder: "東京都西新宿1-1-0" %>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :name, "宛名" %>
+        </td>
+        <td></td>
+        <td>
+          <%= f.text_field :name, placeholder: "大谷翔兵" %>
+        </td>
+        <td></td>
+        <td>
+          <%= f.submit "新規登録", class:"btn btn-success px-4" %>
+        </td>
+      <% end %>
+      </tr>
+    </tbody>
+  </table>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+     <div class="col-9">
+      <table class="table table-bordered">
+        <thead class=" thead-light ">
+          <tr>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @addresses.each do |f| %>
+      <tr>
+        <td><%= f.post_code %></td>
+        <td><%= f.address %></td>
+        <td><%= f.name %></td>
+        <td>
+          <%= link_to "編集する", edit_address_path(f), class: "glyphicon glyphicon-pencil btn-sm btn-success" %>
+          <%= link_to "削除する", address_path(f), method: :delete, data: { confirm: '本当に消しますか？'}, class: "glyphicon glyphicon-trash btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+      </div>
+    </div>
+  </div>
+</div>
