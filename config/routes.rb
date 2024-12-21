@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get "about" => "homes#about"
     get 'orders/log'
     get 'orders/thanx'
+    get 'orders/confirm', to: 'orders#confirm', as: 'orders_confirm'
     resources :orders, only: [:create, :index, :new, :show]
     # get 'genres', to: 'admin/genres#index', as: :genres
     # get 'genres/:id', to: 'admin/genres#show', as: :genre
