@@ -12,7 +12,7 @@ class Customer < ApplicationRecord
    
    #指定したカラムのメソッドがtrueの場合、trueを返す 
   def active_for_authentication?
-    super && (is_delete == false)
+    super && (is_deleted == false)
   end
    
    

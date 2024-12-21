@@ -25,7 +25,7 @@ class Public::CartItemsController < ApplicationController
 
 # DELETE	/cart_items/all_destroy
   def all_destroy
-    current_customer.cart_items.all_destroy # 現在の顧客のカートアイテムをすべて削除
+    current_customer.cart_items.destroy_all # 現在の顧客のカートアイテムをすべて削除
     redirect_to cart_items_path, notice: 'カートが空になりました'
   end
 
