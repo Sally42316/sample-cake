@@ -24,7 +24,7 @@
             <%= f.radio_button :address, :address, checked: true, class: 'mb-0' %>
             <%= f.label :address, "ご自身の住所", class: 'mb-0' %>
             <div style="padding-left: 30px;">
-              <p class="mb-0">〒<%= current_customer.postcode %> <%= current_customer.address %></p>
+              <p class="mb-0">〒<%= current_customer.post_code %> <%= current_customer.address %></p>
               <p class="mb-0" style="padding-bottom: 10px;"><%= current_customer.family_name + current_customer.first_name %> 様</p>
             </div>
           </div>
@@ -43,7 +43,7 @@
                   <tbody>
                     <tr>
                       <td style="padding-right: 15px;">郵便番号(ハイフンなし)</td>
-                      <td style="padding-bottom: 5px;"><%= address_f.text_field :postcode, placeholder: "0000000", style: "width: 350px;" %></td>
+                      <td style="padding-bottom: 5px;"><%= address_f.text_field :post_code, placeholder: "0000000", style: "width: 350px;" %></td>
                     </tr>
                     <tr>
                       <td>住所</td>
