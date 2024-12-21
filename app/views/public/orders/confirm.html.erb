@@ -61,21 +61,21 @@
             <div>
               <b>お届け先 </b>
               <% if params[:order][:address] == "my_address" %>
-                <span> 〒<%= current_customer.postcode %> <%= current_customer.address %></span>
+                <span> 〒<%= current_customer.post_code %> <%= current_customer.address %></span>
                 <span> <%= current_customer.family_name + current_customer.first_name %> 様</span>
-                <%= f.hidden_field :postcode, value: current_customer.postcode %>
+                <%= f.hidden_field :post_code, value: current_customer.post_code %>
                 <%= f.hidden_field :address, value: current_customer.address %>
                 <%= f.hidden_field :name, value: current_customer.family_name + current_customer.first_name %>
               <% elsif params[:order][:address] == "select_address" %>
-                <span> 〒<%= @address.postcode %> <%= @address.address %></span>
+                <span> 〒<%= @address.post_code %> <%= @address.address %></span>
                 <span> <%= @address.name %> 様</span>
-                <%= f.hidden_field :postcode, value: @address.postcode %>
+                <%= f.hidden_field :post_code, value: @address.post_code %>
                 <%= f.hidden_field :address, value: @address.address %>
                 <%= f.hidden_field :name, value: @address.name %>
               <% elsif params[:order][:address] == "new_address" %>
                 <span> 〒<%= params[:new_address][0][:post] %> <%= params[:new_address][0][:address] %></span>
                 <span> <%= params[:new_address][0][:name] %> 様</span>
-                <%= f.hidden_field :post, value: params[:new_address][0][:postcode] %>
+                <%= f.hidden_field :post, value: params[:new_address][0][:post_code] %>
                 <%= f.hidden_field :address, value: params[:new_address][0][:address] %>
                 <%= f.hidden_field :name, value: params[:new_address][0][:name] %>
               <% end %>

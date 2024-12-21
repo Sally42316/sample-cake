@@ -32,7 +32,7 @@
             <%= f.radio_button :address, :select_address %>
             <%= f.label :address, "登録済住所から選択", class: 'mb-0' %>
             <div style="padding: 5px 0 10px 30px;">
-              <%= f.select :selected_address, @addresses.map { |a| ["〒" + a.postcode + " " + a.address + " " + a.name + " " + "様", a.id] }, include_blank: "配送先を選択してください" %>
+              <%= f.select :selected_address, @addresses.map { |a| ["〒" + a.post_code + " " + a.address + " " + a.name + " " + "様", a.id] }, include_blank: "配送先を選択してください" %>
             </div>
           </div>
             <%= f.radio_button :address, :new_address %>
