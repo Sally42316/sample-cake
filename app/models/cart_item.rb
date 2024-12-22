@@ -6,6 +6,9 @@ class CartItem < ApplicationRecord
 
   def price
     (self.item.nontaxprice * 1.10).round
-   end
+  end
+
+  def desroy_all
+  end
 
 end

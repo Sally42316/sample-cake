@@ -23,11 +23,11 @@ genres = Genre.create([
  ])
 
  items = Item.create([
-  { genre_id: genres[0].id, name: 'いちごのショートケーキ（ホール）', introduction: 'いちごのショートケーキです。(seeds.rb内記述)', nontaxprice: 2500, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/i_cake1.jpg"), filename: "i_cake1.jpg"), },
-  { genre_id: genres[0].id, name: 'ガトーショコラ', introduction: 'ガトーショコラです。(seeds.rb内記述)', nontaxprice: 2800, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/i_cake2.jpg"), filename: "i_cake2.jpg"), },
-  { genre_id: genres[1].id, name: 'クッキー', introduction: 'クッキーです。(seeds.rb内記述)', nontaxprice: 800, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/i_cookie1.jpg"), filename: "i_cookie1.jpg"), },
-  { genre_id: genres[2].id, name: 'チョコプリン', introduction: 'チョコプリンです。(seeds.rb内記述)', nontaxprice: 600, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/i_pudding1.jpg"), filename: "i_pudding1.jpg"), },
-  { genre_id: genres[3].id, name: '抹茶キャンディ', introduction: '抹茶のキャンディです(seeds.rb内記述)', nontaxprice: 700, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/i_candy1.png"), filename: "i_candy1.png"), },
-  { genre_id: genres[0].id, name: 'チョコバナナミルフィーユ', introduction: 'チョコバナナミルフィーユです。(seeds.rb内記述)', nontaxprice: 1100, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/i_millefeuille1.png"), filename: "i_millefeuille1.png"), },
-  { genre_id: genres[0].id, name: 'チーズタルト', introduction: 'チーズタルトです。(seeds.rb内記述)', nontaxprice: 330, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/i_cake3.jpg"), filename: "i_cake3.jpg"), },
+  { genre_id: genres[0].id, name: 'いちごのショートケーキ', introduction: 'いちごのショートケーキです。(seeds.rb内記述)', nontaxprice: 600, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/short_cake.jpg"), filename: "short_cake.jpg"), },
+  { genre_id: genres[0].id, name: 'ガトーショコラ', introduction: 'ガトーショコラです。(seeds.rb内記述)', nontaxprice: 800, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/chocolat.jpg"), filename: "chocolat.jpg"), },
+  { genre_id: genres[1].id, name: 'クッキー', introduction: 'クッキーです。(seeds.rb内記述)', nontaxprice: 800, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/cookie.jpg"), filename: "cookie.jpg"), },
+  { genre_id: genres[2].id, name: 'チョコプリン', introduction: 'チョコプリンです。(seeds.rb内記述)', nontaxprice: 600, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/pudding.jpg"), filename: "pudding.jpg"), },
+  { genre_id: genres[3].id, name: '抹茶キャンディ', introduction: '抹茶のキャンディです(seeds.rb内記述)', nontaxprice: 700, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/candy.jpg"), filename: "candy.jpg"), },
+  { genre_id: genres[0].id, name: '苺のミルフィーユ', introduction: '苺のミルフィーユです。(seeds.rb内記述)', nontaxprice: 1100, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/millefeuille.png"), filename: "millefeuille.png"), },
+  { genre_id: genres[0].id, name: 'チーズタルト', introduction: 'チーズタルトです。(seeds.rb内記述)', nontaxprice: 330, is_sell_status: true, image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/cheese.jpg"), filename: "cheese.jpg"), },
 ])

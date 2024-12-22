@@ -15,9 +15,7 @@ Rails.application.routes.draw do
     root :to => "homes#top"
     get "about" => "homes#about"
     get 'orders/log'
-    # get 'orders/confirm', to: 'orders#confirm', as: 'order_confirm'
-    post 'orders/confirm', to: 'orders#confirm', as: 'order_confirm'
-    # post 'orders/confirm', to: 'orders#confirm', as: 'order_confirm'
+    post 'orders/confirm', to: 'orders#confirm', as: 'orders_confirm'
     get 'orders/thanx'
     resources :orders, only: [:create, :index, :new, :show]
     # get 'genres', to: 'admin/genres#index', as: :genres
@@ -30,7 +28,7 @@ Rails.application.routes.draw do
     get 'customers' => "homes#top"
     resources :addresses, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :genres, only: [:index, :show] do # ジャンル毎の商品絞り込みのため追記
-    resources :items, only: [:index] #
+      resources :items, only: [:index] #
     end #
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :cart_items, only: [:index, :update, :destroy, :create] do

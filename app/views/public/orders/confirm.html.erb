@@ -1,73 +1,72 @@
 <div class="my-4" style="padding-bottom: 20px;">
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <h4 class="mb-0"><span style="background-color:#eeeeee">注文情報確認</span></h4>
-    </div>
-  </div>
-  <div class="container my-3">
-    # <%#= form_with model: @order, url: orders_path do |f| %>
-      <%= fields_for "order_detail[]", OrderDetail.new do |order_detail| %>
-        <div class="row">
-          <div class="col-8">
-          <% before_total_price = 0 %>
-            <table class="table table-bordered">
-              <thead style="background-color: #f2f2f2;">
-                <tr>
-                  <th>商品名</th>
-                  <th style="width: 120px;">単価(税込)</th>
-                  <th style="width: 120px;">数量</th>
-                  <th style="width: 120px;">小計</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @cart_items.each do |f| %>
-                <tr>
-                  <td class="align-middle"><%= f.item.name %></td>
-                  <td class="align-middle"><%= f.item.price.to_s(:delimited) %></td>
-                  <td class="align-middle"><%= f.amount %></td>
-                  <td class="align-middle"><%= number_with_delimiter(f.item.price * f.amount) %></td>
-                  <% before_total_price += f.item.price * f.amount %>
-                  <%= order_detail.hidden_field :item_id, value: f.item_id %>
-                  <%= order_detail.hidden_field :amount, value: f.amount %>
-                  <%= order_detail.hidden_field :price, value: f.item.price %>
-                  <%= order_detail.hidden_field :making_status, value: "製作不可" %>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-4">
-            <table class="table table-bordered">
-                <tr>
-                  <th style="background-color: #f2f2f2;">送料</th>
-                  <td><%= @order.shipping_fee %></td>
-                </tr>
-                <tr>
-                  <th style="background-color: #f2f2f2;">商品合計</th>
-                  <td><%= before_total_price.to_s(:delimited) %></td>
-                </tr>
-                <tr>
-                  <th style="background-color: #f2f2f2;">請求金額</th>
-                  <td><%= number_with_delimiter(before_total_price + @order.shipping_fee) %></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="my-3">
-            <div>
-              <b>支払い方法</b>
-            <span><%= Order.payment_methods.key(params[:order][:payment_method].to_i) %></span>
-            </div>
-            <%= form_with model: @order, url: orders_path, local:true do |f| %>
-              <%= f.hidden_field :payment_method, value:  @order.payment_method %>
-              <%= f.hidden_field :post_code, value: @order.post_code %>
-              <%= f.hidden_field :address, value: @order.address%>
-              <%= f.hidden_field :name, value: @order.name %>
-              <%= f.submit "注文を確定する" %>
+<div class="container">
+<div class="d-flex justify-content-between align-items-center">
+  <h4 class="mb-0"><span style="background-color:#eeeeee">注文情報確認</span></h4>
+</div>
+</div>
+<div class="container my-3">
+  <%= fields_for "order_detail[]", OrderDetail.new do |order_detail| %>
+    <div class="row">
+      <div class="col-8">
+      <% before_total_price = 0 %>
+        <table class="table table-bordered">
+          <thead style="background-color: #f2f2f2;">
+            <tr>
+              <th>商品名</th>
+              <th style="width: 120px;">単価(税込)</th>
+              <th style="width: 120px;">数量</th>
+              <th style="width: 120px;">小計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cart_items.each do |f| %>
+            <tr>
+              <td class="align-middle"><%= f.item.name %></td>
+              <td class="align-middle"><%= f.item.price.to_s(:delimited) %></td>
+              <td class="align-middle"><%= f.amount %></td>
+              <td class="align-middle"><%= number_with_delimiter(f.item.price * f.amount) %></td>
+              <% before_total_price += f.item.price * f.amount %>
+              <%= order_detail.hidden_field :item_id, value: f.item_id %>
+              <%= order_detail.hidden_field :amount, value: f.amount %>
+              <%= order_detail.hidden_field :price, value: f.item.price %>
+              <%= order_detail.hidden_field :making_status, value: "製作不可" %>
+            </tr>
             <% end %>
-            
-          </div>
-          
-      <% end %>
-    </div>
-  </div>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-4">
+        <table class="table table-bordered">
+            <tr>
+              <th style="background-color: #f2f2f2;">送料</th>
+              <td><%= @order.shipping_fee %></td>
+            </tr>
+            <tr>
+              <th style="background-color: #f2f2f2;">商品合計</th>
+              <td><%= before_total_price.to_s(:delimited) %></td>
+            </tr>
+            <tr>
+              <th style="background-color: #f2f2f2;">請求金額</th>
+              <td><%= number_with_delimiter(before_total_price + @order.shipping_fee) %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="my-3">
+        <div>
+          <b>支払い方法</b>
+        <span><%= @order.payment_method_i18n %></span>
+        </div>
+        <%= form_with model: @order, url: orders_path, local:true do |f| %>
+          <%= f.hidden_field :payment_method, value:  @order.payment_method %>
+          <%= f.hidden_field :shipping_fee, value:  @order.shipping_fee %>
+          <%= f.hidden_field :total_price, value:  before_total_price + @order.shipping_fee %>
+          <%= f.hidden_field :post_code, value: @order.post_code %>
+          <%= f.hidden_field :address, value: @order.address%>
+          <%= f.hidden_field :name, value: @order.name %>
+          <%= f.submit "注文を確定する" %>
+        <% end %>
+       
+      </div>
+     
+  <% end %>

@@ -10,9 +10,7 @@
         <tbody>
           <tr>
             <td class="align-middle col-md-3" style="background-color: #f5f5f5;">注文日</td>
-            <td class="align-middle">
-              <%= @order.created_at.strftime('%Y/%m/%d') %>
-            </td>
+            <td class="align-middle"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
           </tr>
           <tr>
             <td class="align-middle" style="background-color: #f5f5f5;">配送先</td>
