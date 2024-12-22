@@ -29,7 +29,6 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
     @cart_items = @customer.cart_items
     @order = Order.new(order_params)
-    logger.debug @order.post_code
     @order.customer_id = current_customer.id
     if @order.save
       @order_detail = @order.order_details.build(order_detail_params)
@@ -67,10 +66,9 @@ class Public::OrdersController < ApplicationController
 
   def order_params
     order_params = params.require(:order).permit(:customer_id, :name, :address, :post_code, :payment_method, :total_price, :shipping_fee, :status)
-  order_params[:payment_method] = order_params[:payment_method].to_i if order_params.key?(:payment_method)
-  order_params[:status] = order_params[:status].to_i if order_params.key?(:status)
-
-  order_params
+    order_params[:payment_method] = order_params[:payment_method].to_i if order_params.key?(:payment_method)
+    order_params[:status] = order_params[:status].to_i if order_params.key?(:status)
+    order_params.permit(:customer_id, :name, :address, :post_code, :payment_method, :total_price, :shipping_fee, :status)
   end
 
   def order_detail_params

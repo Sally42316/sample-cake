@@ -8,37 +8,22 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
-  <body>
-    <header>
-
-
-  #コピー元　'https://qiita.com/shinji0320/items/addc05acbe38c65b9190'
-    <% if customer_signed_in? %>
-    <li>
-      <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-    </li>
-    <% elsif admin_signed_in? %>
-    <li>
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-    </li>
-    <% else %>
-    <li>
-      <%= link_to "新規登録", new_customer_registration_path %>
-    </li>
-    <li>
-      <%= link_to "ログイン", new_customer_session_path %>
-    </li>
+  <body class="d-flex flex-column vh-100">
+  <%= render 'layouts/header' %>
+  <main class="mb-auto">
+  <!--フラッシュメッセージ機能の追加-->
+  <div class="container">
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+        <%= message %>
+      </div>
     <% end %>
-
-
-    </header>
-    <main>
-      <%= yield %>
-    </main>
-    <footer>
-    </footer>
-  </body>
+  </div>
+  <!--ここまで-->
+  <%= yield %>
+  </main>
+  <%= render 'layouts/footer' %>
+</body>
 </html>

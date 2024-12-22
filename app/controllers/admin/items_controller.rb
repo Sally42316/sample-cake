@@ -3,6 +3,7 @@ class Admin::ItemsController < ApplicationController
 
     # /admin/items
     def index
+    @search = Item.ransack(params[:q])
     @items = @search.result.page(params[:page]).per(5)
     end
   

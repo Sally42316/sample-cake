@@ -1,0 +1,90 @@
+<header>
+  <div class="container-fluid", style="background-color: #f1f0e5; margin-bottom: 50px; padding: 20px;">
+    <nav class="navbar navbar-expand-md navbar-light">
+    <%= link_to root_path, class:"header-title navbar-brand" do %>
+      <%= image_tag("kennlogo.png",style: "width: 180px; height:60px; ") %>
+    <% end %>
+      <ul class="navbar-nav">
+
+       <% if customer_signed_in? %>
+      <!--カスタマーがログインしている時 -->
+       <li style="position: absolute; top: 35%; left: 40%; transform: translateX(-50%); font-size: 14px;">
+        <span class="text-center">
+         ようこそ、<%= current_customer.family_name %>さん！
+        </span>
+       </li>
+      <div style="position: absolute; top: 0; right: 0; display: flex;">
+        <li class="nav-item">
+         <%= link_to "マイページ", customers_mypage_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "商品一覧", items_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "カート", cart_items_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_customer_session_path, class: 'btn btn-outline-secondary btn-sm mx-3', method: :delete %>
+        </li>
+      </div>
+        <!-- 検索窓 -->
+        <li class="searchbox" style="position: absolute; top: 55px; right: 15px;">
+         <%= search_form_for(@search, url:items_path) do |f| %>
+           <%= f.text_field :name_cont ,placeholder: '商品名を入力' %>
+         <% end %>
+        </li>
+
+        <% elsif admin_signed_in? %>
+       <!-- 管理者がログインしている時 -->
+       <div style="position: absolute; top: 0; right: 0; display: flex;">
+        <li class="nav-item">
+         <%= link_to "商品一覧", admin_items_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "会員一覧", admin_customers_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "注文履歴一覧", admin_root_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "ジャンル一覧", admin_genres_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_admin_session_path, class: 'btn btn-outline-secondary btn-sm mx-3', method: :delete %>
+        </li>
+       </div>
+
+        <!-- 検索窓 -->
+        <li class="searchbox" style="position: absolute; top: 30px; right: 15px;">
+       <%= search_form_for(@search, url:admin_items_path) do |f| %>
+          <%= f.text_field :name_cont ,placeholder: '商品名を入力' %>
+        <% end %>
+        </li>
+        <% else %>
+
+      <!-- ログインしていない時 -->
+      <div style="position: absolute; top: 0; right: 0; display: flex;">
+        <li class="nav-item">
+         <%= link_to "About", about_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "商品一覧", items_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "新規登録", new_customer_registration_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+         <li class="nav-item"><%= link_to "ログイン", new_customer_session_path,class: 'btn btn-outline-secondary btn-sm mx-3' %>
+        </li>
+      </div>
+        <!-- 検索窓 -->
+        <li class="searchbox" style="position: absolute; top: 55px; right: 15px;">
+          <%= search_form_for(@search, url:items_path) do |f| %>
+            <%= f.text_field :name_cont ,placeholder: '商品名を入力' %>
+          <% end %>
+        </li>
+        <% end %>
+
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -3,10 +3,9 @@
     <div class="col">
       <div class="col-6 offset-3">
 
-   <h4><span style="background-color:#eeeeee">管理者ログイン</span></h4>
-   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-   <%= render "public/shared/error_messages", resource: resource %>
-
+      <h4><span style="background-color:#eeeeee">管理者ログイン</span></h4>
+      <%= form_for(Admin.new, as: :admin, url: session_path(:admin)) do |f| %>
+      <%= render "admin/shared/error_messages", resource: :admin %>
         <div class="field my-2">
           <%= f.label :"メールアドレス",class:"form-label mt-3"%><br />
           <%= f.email_field :email, placeholder: "sample@example.com", autofocus: true, autocomplete: "email" ,class:"form-control" %>
