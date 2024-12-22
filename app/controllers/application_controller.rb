@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
  before_action :set_search
 
   def after_sign_in_path_for(resource)
-   case resource
+  case resource
     when Admin
-     admin_root_path
+      admin_root_path
     when Customer
-     customers_mypage_path
-   end
+      customers_mypage_path
+  end
   end
 
   def after_sign_out_path_for(resource)
