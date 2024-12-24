@@ -29,10 +29,17 @@ class Public::OrdersController < ApplicationController
       @order.name = current_customer.family_name + current_customer.first_name
     # elsif params[:order][:address] == "select_address" && params[:order][:selected_address].empty?
     elsif params[:order][:select_address] == "1"
-      redirect_to new_order_path, alert: '配送先を選択してください'
+      @address = Address.find(params[:order][:selected_address])
+      @order.post_code = @address.post_code
+      @order.address = @address.address
+      @order.name = @address.name
+      #redirect_to new_order_path, alert: '配送先を選択してください'
     # elsif params[:order][:address] == "new_address" && params[:new_address].any? { |address| address["post_code"].empty? || address["address"].empty? || address["name"].empty? }
-     
-      redirect_to new_order_path, alert: '新しいお届け先の情報が不足しています'
+    elsif params[:order][:select_address] == "2"
+      @order.post_code = params[:order][:post_code]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+      #redirect_to new_order_path, alert: '新しいお届け先の情報が不足しています'
     end
   end
 
@@ -49,11 +56,12 @@ class Public::OrdersController < ApplicationController
     @order.status = 'waiting_for_payment' 
     if @order.save
       @cart_items.each do |cart_item|
-        order_detail = @order.order_details.new
-      
-        order_detail.item_id=cart_item.item_id,
-        order_detail.price=cart_item.item.price,
-        order_detail.amount=cart_item.amount
+        order_detail = OrderDetail.new
+        order_detail.order_id = @order.id
+        order_detail.item_id = cart_item.item_id
+        order_detail.price = cart_item.item.price
+        order_detail.amount = cart_item.amount
+        order_detail.making_status = 'not_create'
         order_detail.save 
       end
       # カートを空にする処理（注文が完了した後はカートをクリア）

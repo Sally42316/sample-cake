@@ -11,9 +11,11 @@ class Item < ApplicationRecord
   validates :nontaxprice,         presence: true
   validates :is_sell_status,     inclusion: [true, false]
 
-    def price
-        (self.nontaxprice * 1.10).round
-    end
+  def price
+    return unless self.nontaxprice # nontaxpriceがnilの場合は何もせず終了する
+  
+    (self.nontaxprice * 1.10).round
+  end
 
   def self.ransackable_attributes(auth_object = nil)
     ['name']

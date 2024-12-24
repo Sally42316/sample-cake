@@ -21,7 +21,7 @@
       <tr>
         <td>税込価格<br>(税抜価格)</td>
         <td><%= @items.price.to_s(:delimited) %> 円
-            (<%= @items.price.to_s(:delimited) %> 円)</td>
+            (<%= @items.nontaxprice.to_s(:delimited) %> 円)</td>
       </tr>
       <tr>
         <td>販売ステータス</td>

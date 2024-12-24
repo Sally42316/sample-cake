@@ -57,6 +57,12 @@
           <b>支払い方法</b>
         <span><%= @order.payment_method_i18n %></span>
         </div>
+        <div>
+          <b>お届け先</b>
+          <span>〒<%= @order.post_code %></span><br>
+          <span><%= @order.address %></span><br>
+          <span><%= @order.name %></span>
+        </div>
         <%= form_with model: @order, url: orders_path, local:true do |f| %>
           <%= f.hidden_field :payment_method, value:  @order.payment_method %>
           <%= f.hidden_field :shipping_fee, value:  @order.shipping_fee %>

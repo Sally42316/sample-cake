@@ -25,16 +25,16 @@
           </td>
           <!--注文商品-->
           <td class="align-middle">
-            <ul>
-              <% order.order_details.each do |order_detail| %>
-                <li><%= order_detail.item.name %></li>
-              <% end %>
-            </ul>
-          </td>
+  <ul style="list-style-type: none;">
+    <% order.order_details.each do |order_detail| %>
+      <li><%= order_detail.item.name %></li>
+    <% end %>
+  </ul>
+</td>
           <!--支払金額-->
           <td class="align-middle"><%= number_to_currency(order.total_price, delimiter: ',', unit:'', precision: 0)+"円" %></td>
           <!--ステータス-->
-          <td class="align-middle"><%= order.status %></td>
+          <td class="align-middle"><%= order.status_i18n %></td>
           <!--詳細リンク-->
           <td class="align-middle"><%= link_to '表示する', order_path(order), class: 'btn btn-primary' %></td>
         </tr>

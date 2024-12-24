@@ -20,7 +20,7 @@
           <td><%= link_to customer.family_name + " "  + customer.first_name,admin_customer_path(customer.id) %></td>
           <td><%= customer.email %></td>
 
-          <% if customer.is_deleted == true %>
+          <% if customer.is_deleted == false %>
             <td class=" text-success ">有効</td>
           <% else %>
             <td class=" text-secondary ">退会</p>
