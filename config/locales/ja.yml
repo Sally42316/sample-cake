@@ -12,7 +12,7 @@
         shipped: "発送済み"
     order_detail:
       making_status:
-        not_create: "製作不可"
+        not_create: "着手不可"
         waiting_production: "製作待ち"
         making_production: "製作中"
         finished: "製作完了"

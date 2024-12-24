@@ -19,7 +19,7 @@ class Admin::ItemsController < ApplicationController
      flash[:notice] = '登録成功'
       redirect_to admin_item_path(@item.id)
       else
-     flash[:notice] = '登録error'
+     flash[:alert] = '登録error'
       render :new
       end
     end
@@ -41,7 +41,7 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = ' 更新成功'
       redirect_to admin_item_path(@items)
      else
-      flash[:notice] = ' 更新error'
+      flash[:alert] = ' 更新error'
       redirect_to admin_item_path(@items)
      end
     end

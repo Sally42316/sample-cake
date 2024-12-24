@@ -12,9 +12,6 @@ InstagramのDMやメールで通販の注文を受けていたが、情報管理
 ・友人や家族へのプレゼントなど、注文者の住所以外にも商品を発送できます。<br>
 ・支払い方法はクレジットカード、銀行振込から選択できます。<br>
 
-# サイトトップページ画像
-
-![Naganocake](git hubのURL張る)
 
 # アプリケーションの機能
 ● 顧客側
@@ -51,12 +48,15 @@ InstagramのDMやメールで通販の注文を受けていたが、情報管理
 |ジャンル設定機能|・ジャンルの追加・変更を行うことができる。|×|
 
 # インストール
-<p>$ git clone gitのURL</p>
+<p>$ git clone https://github.com/WEBCAMP-TKG/nagano.cake.git</p>→developから落としてください等の表記にする。このコマンドで落とすと、mainが落とされる。
+developをmainに統合すればcloneは使えるかも？
 <p>$ cd nagano.cake</p>
+$ yarn add @babel/plugin-proposal-private-methods @babel/plugin-proposal-private-property-in-object　入れる？
 <p>$ bundle install</p>
 <p>$ rails db:migrate</p>
 <p>$ rails db:seed</p>
 <p>$ rails s</p>
+あと不要なコメントアウトをバンバン消す。
 
 ## テスト
 ターミナル（もしくはコマンドプロンプト）で上記の作業を行った後、ローカルサーバーにアクセスしてご覧ください。
@@ -75,4 +75,6 @@ InstagramのDMやメールで通販の注文を受けていたが、情報管理
 
 チームTKG<br>
 メンバー<br>
-・
+まさお<br>
+さりー<br>
+あっきー<br>

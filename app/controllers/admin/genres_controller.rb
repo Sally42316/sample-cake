@@ -9,9 +9,11 @@ end
 def create
    @genre = Genre.new(genre_params)
   if @genre.save
+    flash[:notice] = '登録成功'
     redirect_to admin_genres_path
   else
-    @renres = Genre.all
+    flash[:alert] = '登録error'
+    @genres = Genre.all
     render 'index'
   end
 end

@@ -41,10 +41,10 @@
           <td><%= f.text_field :email,size: "50" %></td>
       </tr>
         <th><%= f.label :会員ステータス %></th>
-          <td><%= f.radio_button :is_deleted, true %>
-            <%= f.label :is_deleted, "有効" %>
-            <%= f.radio_button :is_deleted, false %>
-            <%= f.label :is_deleted, "退会" %>
+          <td><%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, "有効" %>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, "退会" %>
           </td>
     </tbody>
       <tr>

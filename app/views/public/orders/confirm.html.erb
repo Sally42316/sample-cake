@@ -55,13 +55,12 @@
       <div class="my-3">
         <div>
           <b>支払い方法</b>
-        <span><%= @order.payment_method_i18n %></span>
-        </div>
-        <div>
+          <span><%= @order.payment_method_i18n %></span><br>
           <b>お届け先</b>
-          <span>〒<%= @order.post_code %></span><br>
+          <span>〒<%= @order.post_code %></span>
           <span><%= @order.address %></span><br>
           <span><%= @order.name %></span>
+        </div>
         </div>
         <%= form_with model: @order, url: orders_path, local:true do |f| %>
           <%= f.hidden_field :payment_method, value:  @order.payment_method %>
@@ -70,7 +69,9 @@
           <%= f.hidden_field :post_code, value: @order.post_code %>
           <%= f.hidden_field :address, value: @order.address%>
           <%= f.hidden_field :name, value: @order.name %>
-          <%= f.submit "注文を確定する" %>
+          <div class="col-12 d-flex justify-content-center">
+          <%= f.submit "注文を確定する",class:"btn btn-success" %>
+          </div>
         <% end %>
        
       </div>

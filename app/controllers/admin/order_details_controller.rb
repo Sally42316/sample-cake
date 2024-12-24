@@ -36,4 +36,3 @@ class Admin::OrderDetailsController < ApplicationController
       params.require(:order_detail).permit(:making_status)
     end
   end
-  
